@@ -35,6 +35,10 @@ public class GraphicsFactory {
    * @throws SlickException Indicates no buffers are supported
    */
   private static void init() throws SlickException {
+    if (init) {
+      return;
+    }
+
     init = true;
 
     if (fbo) {
