@@ -39,6 +39,9 @@ public class ImageLoader {
     Image ret = cache2.get(s);
     if (ret == null) {
       InputStream in = loader.getResourceAsStream("rez/" + s);
+      if (in == null) {
+        throw new NullPointerException("Could not find image: rez/" + s);
+      }
       try {
         ret = new Image(in, s, false);
         cache2.put(s, ret);

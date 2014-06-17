@@ -20,8 +20,13 @@ public class SGraphics {
     g.setAntiAlias(true);
   }
 
-  public SGraphics setColor(Color c) {
+  public SGraphics color(Color c) {
     g.setColor(c);
+    return this;
+  }
+
+  public SGraphics draw(Shape shape) {
+    g.draw(shape);
     return this;
   }
 
@@ -51,7 +56,7 @@ public class SGraphics {
         (float) (radius * 2));
   }
 
-  private SGraphics fillOval(double x, double y, double w, double h) {
+  public SGraphics fillOval(double x, double y, double w, double h) {
     if (clipMiss(x, y, w, h)) {
       return this;
     }
@@ -76,7 +81,10 @@ public class SGraphics {
       return this;
     }
 
+    boolean old = g.isAntiAlias();
+    g.setAntiAlias(false);
     g.drawImage(image, (float) x, (float) y);
+    g.setAntiAlias(old);
     return this;
   }
 
@@ -85,10 +93,11 @@ public class SGraphics {
     if (clipMiss(x, y, w, h)) {
       return this;
     }
-
+    boolean old = g.isAntiAlias();
+    g.setAntiAlias(false);
     g.drawImage(image, (float) x, (float) y, (float) (x + w), (float) (y + h), (float) srcX,
         (float) srcY, (float) (srcX + w), (float) (srcY + h));
-
+    g.setAntiAlias(old);
     return this;
   }
 
@@ -101,6 +110,11 @@ public class SGraphics {
     g.setLineWidth((float) lineWidth);
     g.drawLine((float) x, (float) y, (float) xx, (float) yy);
     g.setLineWidth(oldWidth);
+    return this;
+  }
+
+  public SGraphics lineWidth(double lineWidth) {
+    g.setLineWidth((float) lineWidth);
     return this;
   }
 
@@ -160,9 +174,18 @@ public class SGraphics {
     return false;
   }
 
+  public SGraphics centerCameraOn(double x, double y, int screenWidth, int screenHeight) {
+    translate(x - screenWidth / 2, y - screenHeight / 2);
+    return this;
+  }
+
   public SGraphics destroy() {
     g.destroy();
     return this;
+  }
+
+  public static SGraphics create(Graphics g) {
+    return new SGraphics(g);
   }
 
   public static SGraphics create(Image im) {
