@@ -14,6 +14,7 @@ public class SGraphics {
   private final Graphics g;
 
   private Rectangle clip = new Rectangle(0, 0, 0, 0);
+  private Color imageFilter = Color.white;
 
   public SGraphics(Graphics g) {
     this.g = g;
@@ -22,6 +23,14 @@ public class SGraphics {
 
   public SGraphics color(Color c) {
     g.setColor(c);
+    return this;
+  }
+
+  public SGraphics imageFilter(Color imageFilterColor) {
+    if (imageFilterColor == null) {
+      imageFilterColor = Color.white;
+    }
+    this.imageFilter = imageFilterColor;
     return this;
   }
 
@@ -77,15 +86,7 @@ public class SGraphics {
   }
 
   public SGraphics draw(Image image, double x, double y) {
-    if (clipMiss(x, y, image.getWidth(), image.getHeight())) {
-      return this;
-    }
-
-    boolean old = g.isAntiAlias();
-    g.setAntiAlias(false);
-    g.drawImage(image, (float) x, (float) y);
-    g.setAntiAlias(old);
-    return this;
+    return draw(image, x, y, image.getWidth(), image.getHeight());
   }
 
   public SGraphics draw(Image image, double x, double y, double w, double h) {
@@ -105,7 +106,7 @@ public class SGraphics {
     boolean old = g.isAntiAlias();
     g.setAntiAlias(false);
     g.drawImage(image, (float) x, (float) y, (float) (x + w), (float) (y + h), (float) srcX,
-        (float) srcY, (float) (srcX + srcW), (float) (srcY + srcH));
+        (float) srcY, (float) (srcX + srcW), (float) (srcY + srcH), imageFilter);
     g.setAntiAlias(old);
     return this;
   }
