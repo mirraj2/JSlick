@@ -88,15 +88,24 @@ public class SGraphics {
     return this;
   }
 
+  public SGraphics draw(Image image, double x, double y, double w, double h) {
+    return draw(image, x, y, w, h, 0, 0, image.getWidth(), image.getHeight());
+  }
+
   public SGraphics draw(Image image, double x, double y, double srcX, double srcY, double w,
       double h) {
+    return draw(image, x, y, w, h, srcX, srcY, w, h);
+  }
+
+  public SGraphics draw(Image image, double x, double y, double w, double h, double srcX, double srcY, double srcW,
+      double srcH) {
     if (clipMiss(x, y, w, h)) {
       return this;
     }
     boolean old = g.isAntiAlias();
     g.setAntiAlias(false);
     g.drawImage(image, (float) x, (float) y, (float) (x + w), (float) (y + h), (float) srcX,
-        (float) srcY, (float) (srcX + w), (float) (srcY + h));
+        (float) srcY, (float) (srcX + srcW), (float) (srcY + srcH));
     g.setAntiAlias(old);
     return this;
   }
@@ -134,12 +143,16 @@ public class SGraphics {
     return this;
   }
 
-  public SGraphics textCentered(String text, int w, int h) {
+  public SGraphics textCentered(String text, double w, double h) {
+    return textCentered(text, 0, 0, w, h);
+  }
+
+  public SGraphics textCentered(String text, double x, double y, double w, double h) {
     Font font = g.getFont();
     int sw = font.getWidth(text);
     int sh = font.getHeight(text);
 
-    return text(text, w / 2 - sw / 2, h / 2 - sh / 2);
+    return text(text, x + w / 2 - sw / 2, y + h / 2 - sh / 2);
   }
 
   public SGraphics font(Font font) {
