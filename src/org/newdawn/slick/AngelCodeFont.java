@@ -10,8 +10,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.Map.Entry;
+import java.util.StringTokenizer;
 
 import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
@@ -100,7 +100,7 @@ public class AngelCodeFont implements Font {
    * @throws SlickException
    *             Indicates a failure to load either file
    */
-  public AngelCodeFont(String fntFile, String imgFile) throws SlickException {
+  public AngelCodeFont(String fntFile, String imgFile) {
     fontImage = new Image(imgFile);
 
     parseFnt(ResourceLoader.getResourceAsStream(fntFile));

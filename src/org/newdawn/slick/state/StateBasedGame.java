@@ -47,13 +47,14 @@ public abstract class StateBasedGame implements Game, InputListener {
 			public int getID() {
 				return -1;
 			}
-			public void init(GameContainer container, StateBasedGame game) throws SlickException {
+
+      public void init(GameContainer container, StateBasedGame game) {
 			}
-			public void render(StateBasedGame game, Graphics g) throws SlickException {
+
+      public void update(GameContainer container, StateBasedGame game, int delta) {
 			}
-			public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-			}
-			public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+
+      public void render(GameContainer container, StateBasedGame game, Graphics g) {
 			}
 		};
 	}

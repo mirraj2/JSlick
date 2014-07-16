@@ -114,8 +114,8 @@ public class AppGameContainer extends GameContainer {
 
     try {
       targetDisplayMode = null;
+      DisplayMode[] modes = Display.getAvailableDisplayModes();
       if (fullscreen) {
-        DisplayMode[] modes = Display.getAvailableDisplayModes();
         int freq = 0;
 
         for (int i = 0; i < modes.length; i++) {

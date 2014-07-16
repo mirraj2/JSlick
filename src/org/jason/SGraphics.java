@@ -193,6 +193,19 @@ public class SGraphics {
     return this;
   }
 
+  public SGraphics addMode() {
+    return drawMode(Graphics.MODE_ADD);
+  }
+
+  public SGraphics normalMode() {
+    return drawMode(Graphics.MODE_NORMAL);
+  }
+
+  public SGraphics drawMode(int drawMode) {
+    g.setDrawMode(drawMode);
+    return this;
+  }
+
   public SGraphics destroy() {
     g.destroy();
     return this;

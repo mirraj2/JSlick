@@ -5,7 +5,7 @@ package org.newdawn.slick;
  *
  * @author kevin
  */
-public class SlickException extends Exception {
+public class SlickException extends RuntimeException {
   /**
    * Create a new exception with a detail message
    * 

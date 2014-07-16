@@ -6,7 +6,6 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -38,7 +37,7 @@ public class TestState1 extends BasicGameState {
 	/**
 	 * @see org.newdawn.slick.state.BasicGameState#init(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame)
 	 */
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+  public void init(GameContainer container, StateBasedGame game) {
 		this.game = game;
 		font = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
 	}
