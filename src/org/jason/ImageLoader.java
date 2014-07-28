@@ -13,20 +13,20 @@ import org.newdawn.slick.SlickException;
 
 public class ImageLoader {
 
-  private static final Map<String, BufferedImage> cache = new HashMap<>();
-  private static final Map<String, Image> cache2 = new HashMap<>();
+  private final Map<String, BufferedImage> cache = new HashMap<>();
+  private final Map<String, Image> cache2 = new HashMap<>();
 
-  private static Class<?> loader;
+  private final Class<?> loader;
 
-  public static void setLoader(Class<?> loader) {
-    ImageLoader.loader = loader;
+  public ImageLoader(Class<?> loader) {
+    this.loader = loader;
   }
 
-  public static BufferedImage getImage(String s) {
+  public BufferedImage getImage(String s) {
     BufferedImage ret = cache.get(s);
     if (ret == null) {
       try {
-        ret = ImageIO.read(loader.getResource("rez/" + s));
+        ret = ImageIO.read(loader.getResource(s));
         cache.put(s, ret);
       } catch (IOException e) {
         throw new RuntimeException(e);
@@ -35,10 +35,10 @@ public class ImageLoader {
     return ret;
   }
 
-  public static Image getSlickImage(String s) {
+  public Image getSlickImage(String s) {
     Image ret = cache2.get(s);
     if (ret == null) {
-      InputStream in = loader.getResourceAsStream("rez/" + s);
+      InputStream in = loader.getResourceAsStream(s);
       if (in == null) {
         throw new NullPointerException("Could not find image: rez/" + s);
       }
