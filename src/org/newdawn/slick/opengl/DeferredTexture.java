@@ -2,10 +2,8 @@ package org.newdawn.slick.opengl;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
-import org.newdawn.slick.opengl.renderer.SGL;
 
 /**
  * A texture proxy that can be used to load a texture at a later date while still
@@ -49,11 +47,20 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.loading.DeferredResource#load()
 	 */
-	public void load() throws IOException {
+	@Override
+  public void load() throws IOException {
+    try {
+      in.available();
+    } catch (Exception e) {
+      throw new RuntimeException("The stream was closed before the deferred loading could happen! resource = " + resourceName);
+    }
+
 		boolean before = InternalTextureLoader.get().isDeferredLoading();
 		InternalTextureLoader.get().setDeferredLoading(false);
 		target = InternalTextureLoader.get().getTexture(in, resourceName, flipped, filter, trans);
 		InternalTextureLoader.get().setDeferredLoading(before);
+
+    in.close();
 	}
 	
 	/**
@@ -74,7 +81,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#bind()
 	 */
-	public void bind() {
+	@Override
+  public void bind() {
 		checkTarget();
 
 		target.bind();
@@ -83,7 +91,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getHeight()
 	 */
-	public float getHeight() {
+	@Override
+  public float getHeight() {
 		checkTarget();
 
 		return target.getHeight();
@@ -92,7 +101,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getImageHeight()
 	 */
-	public int getImageHeight() {
+	@Override
+  public int getImageHeight() {
 		checkTarget();
 		return target.getImageHeight();
 	}
@@ -100,7 +110,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getImageWidth()
 	 */
-	public int getImageWidth() {
+	@Override
+  public int getImageWidth() {
 		checkTarget();
 		return target.getImageWidth();
 	}
@@ -108,7 +119,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureHeight()
 	 */
-	public int getTextureHeight() {
+	@Override
+  public int getTextureHeight() {
 		checkTarget();
 		return target.getTextureHeight();
 	}
@@ -116,7 +128,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureID()
 	 */
-	public int getTextureID() {
+	@Override
+  public int getTextureID() {
 		checkTarget();
 		return target.getTextureID();
 	}
@@ -124,7 +137,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureRef()
 	 */
-	public String getTextureRef() {
+	@Override
+  public String getTextureRef() {
 		checkTarget();
 		return target.getTextureRef();
 	}
@@ -132,7 +146,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureWidth()
 	 */
-	public int getTextureWidth() {
+	@Override
+  public int getTextureWidth() {
 		checkTarget();
 		return target.getTextureWidth();
 	}
@@ -140,7 +155,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getWidth()
 	 */
-	public float getWidth() {
+	@Override
+  public float getWidth() {
 		checkTarget();
 		return target.getWidth();
 	}
@@ -148,7 +164,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#release()
 	 */
-	public void release() {
+	@Override
+  public void release() {
 		checkTarget();
 		target.release();
 	}
@@ -156,7 +173,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setAlpha(boolean)
 	 */
-	public void setAlpha(boolean alpha) {
+	@Override
+  public void setAlpha(boolean alpha) {
 		checkTarget();
 		target.setAlpha(alpha);
 	}
@@ -164,7 +182,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setHeight(int)
 	 */
-	public void setHeight(int height) {
+	@Override
+  public void setHeight(int height) {
 		checkTarget();
 		target.setHeight(height);
 	}
@@ -172,7 +191,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setTextureHeight(int)
 	 */
-	public void setTextureHeight(int texHeight) {
+	@Override
+  public void setTextureHeight(int texHeight) {
 		checkTarget();
 		target.setTextureHeight(texHeight);
 	}
@@ -180,7 +200,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setTextureID(int)
 	 */
-	public void setTextureID(int textureID) {
+	@Override
+  public void setTextureID(int textureID) {
 		checkTarget();
 		target.setTextureID(textureID);
 	}
@@ -188,7 +209,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setTextureWidth(int)
 	 */
-	public void setTextureWidth(int texWidth) {
+	@Override
+  public void setTextureWidth(int texWidth) {
 		checkTarget();
 		target.setTextureWidth(texWidth);
 	}
@@ -196,7 +218,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#setWidth(int)
 	 */
-	public void setWidth(int width) {
+	@Override
+  public void setWidth(int width) {
 		checkTarget();
 		target.setWidth(width);
 	}
@@ -204,7 +227,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.opengl.TextureImpl#getTextureData()
 	 */
-	public byte[] getTextureData() {
+	@Override
+  public byte[] getTextureData() {
 		checkTarget();
 		return target.getTextureData();
 	}
@@ -212,13 +236,15 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
 	/**
 	 * @see org.newdawn.slick.loading.DeferredResource#getDescription()
 	 */
-	public String getDescription() {
+	@Override
+  public String getDescription() {
 		return resourceName;
 	}
 	
     /**
 	 * @see org.newdawn.slick.opengl.Texture#hasAlpha()
 	 */
+    @Override
     public boolean hasAlpha() {
 		checkTarget();
 		return target.hasAlpha();
@@ -227,7 +253,8 @@ public class DeferredTexture extends TextureImpl implements DeferredResource {
     /**
      * @see org.newdawn.slick.opengl.Texture#setTextureFilter(int)
      */
-	public void setTextureFilter(int textureFilter) {
+	@Override
+  public void setTextureFilter(int textureFilter) {
 		checkTarget();
 		target.setTextureFilter(textureFilter);
 	}

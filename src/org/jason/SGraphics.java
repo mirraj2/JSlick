@@ -211,6 +211,10 @@ public class SGraphics {
     return this;
   }
 
+  public Font getFont() {
+    return g.getFont();
+  }
+
   public static SGraphics create(Graphics g) {
     return new SGraphics(g);
   }
