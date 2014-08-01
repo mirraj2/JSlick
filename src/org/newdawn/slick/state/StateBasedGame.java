@@ -93,6 +93,10 @@ public abstract class StateBasedGame implements Game, InputListener {
 		return currentState;
 	}
 	
+	public GameState getNextState() {
+      return nextState;
+    }
+	
 	/**
 	 * @see org.newdawn.slick.InputListener#setInput(org.newdawn.slick.Input)
 	 */

@@ -1,7 +1,6 @@
 package org.jason;
 
 import java.awt.Rectangle;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
@@ -18,7 +17,7 @@ public class SGraphics {
 
   public SGraphics(Graphics g) {
     this.g = g;
-    g.setAntiAlias(true);
+    antialias(true);
   }
 
   public SGraphics color(Color c) {
@@ -197,6 +196,10 @@ public class SGraphics {
     return drawMode(Graphics.MODE_ADD);
   }
 
+  public SGraphics screenMode() {
+    return drawMode(Graphics.MODE_SCREEN);
+  }
+
   public SGraphics normalMode() {
     return drawMode(Graphics.MODE_NORMAL);
   }
@@ -213,6 +216,11 @@ public class SGraphics {
 
   public Font getFont() {
     return g.getFont();
+  }
+
+  public SGraphics antialias(boolean b) {
+    g.setAntiAlias(b);
+    return this;
   }
 
   public static SGraphics create(Graphics g) {

@@ -2,7 +2,6 @@ package org.newdawn.slick;
 
 import java.io.IOException;
 import java.util.Properties;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Cursor;
@@ -99,7 +98,6 @@ public abstract class GameContainer implements GUIContext {
     this.game = game;
     lastFrame = getTime();
 
-    getBuildVersion();
     Log.checkVerboseLogSetting();
   }
 
@@ -314,6 +312,7 @@ public abstract class GameContainer implements GUIContext {
    * 
    * @return The default system font
    */
+  @Override
   public Font getDefaultFont() {
     return defaultFont;
   }
@@ -391,6 +390,7 @@ public abstract class GameContainer implements GUIContext {
    * 
    * @return The screen width
    */
+  @Override
   public abstract int getScreenWidth();
 
   /**
@@ -398,6 +398,7 @@ public abstract class GameContainer implements GUIContext {
    * 
    * @return The screen height
    */
+  @Override
   public abstract int getScreenHeight();
 
   /**
@@ -405,6 +406,7 @@ public abstract class GameContainer implements GUIContext {
    * 
    * @return The width of the game canvas
    */
+  @Override
   public int getWidth() {
     return width;
   }
@@ -414,6 +416,7 @@ public abstract class GameContainer implements GUIContext {
    * 
    * @return The height of the game canvas
    */
+  @Override
   public int getHeight() {
     return height;
   }
@@ -444,6 +447,7 @@ public abstract class GameContainer implements GUIContext {
    * 
    * @return The system time in milliseconds
    */
+  @Override
   public long getTime() {
     return (Sys.getTime() * 1000) / Sys.getTimerResolution();
   }
@@ -471,6 +475,7 @@ public abstract class GameContainer implements GUIContext {
    * @param hotSpotY The y coordinate of the hotspot within the cursor image
    * @throws SlickException Indicates a failure to load the cursor image or create the hardware cursor
    */
+  @Override
   public abstract void setMouseCursor(String ref, int hotSpotX, int hotSpotY) throws SlickException;
 
   /**
@@ -482,6 +487,7 @@ public abstract class GameContainer implements GUIContext {
    * @param hotSpotY The y coordinate of the hotspot within the cursor image
    * @throws SlickException Indicates a failure to load the cursor image or create the hardware cursor
    */
+  @Override
   public abstract void setMouseCursor(ImageData data, int hotSpotX, int hotSpotY) throws SlickException;
 
   /**
@@ -507,6 +513,7 @@ public abstract class GameContainer implements GUIContext {
    * @param hotSpotY The y coordinate of the hotspot within the cursor image
    * @throws SlickException Indicates a failure to load the cursor image or create the hardware cursor
    */
+  @Override
   public abstract void setMouseCursor(Cursor cursor, int hotSpotX, int hotSpotY) throws SlickException;
 
   /**
@@ -539,6 +546,7 @@ public abstract class GameContainer implements GUIContext {
    * Set the default mouse cursor - i.e. the original cursor before any native 
    * cursor was set
    */
+  @Override
   public abstract void setDefaultMouseCursor();
 
   /**
@@ -546,6 +554,7 @@ public abstract class GameContainer implements GUIContext {
    * 
    * @return The input system available to this game container
    */
+  @Override
   public Input getInput() {
     return input;
   }

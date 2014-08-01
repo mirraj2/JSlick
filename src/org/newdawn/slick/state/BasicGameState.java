@@ -118,7 +118,7 @@ public abstract class BasicGameState implements GameState {
 	/**
 	 * @see org.newdawn.slick.InputListener#mouseMoved(int, int, int, int)
 	 */
-	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+	public void mouseMoved(int oldX, int oldY, int x, int y) {
 	}
 
 	/**
