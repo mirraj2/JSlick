@@ -8,21 +8,28 @@ import org.apache.log4j.Logger;
 public class Natives {
 
   private static final Logger logger = Logger.getLogger(Natives.class);
-  
+
   public static void setupNativeLibs() {
+    if (OS.type == OS.OS_Type.WINDOWS) {
+      extract("lwjgl64.dll", "OpenAL64.dll");
+    } else if (OS.type == OS.OS_Type.MAC) {
+      extract("liblwjgl.dylib", "openal.dylib");
+    } else {
+      throw new RuntimeException("Don't support: " + OS.type);
+    }
+
+  }
+
+  private static void extract(String... natives) {
     File dir = new File(OS.getTemporaryFolder(), "natives");
     dir.mkdirs();
 
-    if (OS.type == OS.OS_Type.WINDOWS) {
-      logger.debug("Extract Windows Natives");
-      IO.from(Natives.class, "lwjgl64.dll").to(new File(dir, "lwjgl64.dll"));
-      IO.from(Natives.class, "OpenAL64.dll").to(new File(dir, "OpenAL64.dll"));
-    } else if (OS.type == OS.OS_Type.MAC) {
-      logger.debug("Extract Mac Natives");
-      IO.from(Natives.class, "liblwjgl.dylib").to(new File(dir, "liblwjgl.dylib"));
-      IO.from(Natives.class, "openal.dylib").to(new File(dir, "openal.dylib"));
-    } else {
-      throw new RuntimeException("Don't support: " + OS.type);
+    for (String n : natives) {
+      File target = new File(dir, n);
+      if (!target.exists()) {
+        logger.debug("Extracting " + n + " to " + target);
+        IO.from(Natives.class, n).to(target);
+      }
     }
 
     System.setProperty("org.lwjgl.librarypath", dir.getPath());

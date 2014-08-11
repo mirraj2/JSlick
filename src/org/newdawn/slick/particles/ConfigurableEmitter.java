@@ -589,7 +589,7 @@ public class ConfigurableEmitter implements ParticleEmitter {
 		 * @param value
 		 *            The initial value
 		 */
-		private RandomValue(float value) {
+		public RandomValue(float value) {
 			this.value = value;
 		}
 

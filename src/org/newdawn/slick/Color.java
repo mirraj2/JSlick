@@ -2,7 +2,6 @@ package org.newdawn.slick;
 
 import java.io.Serializable;
 import java.nio.FloatBuffer;
-
 import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 
@@ -185,6 +184,7 @@ public class Color implements Serializable {
   /**
    * @see java.lang.Object#hashCode()
    */
+  @Override
   public int hashCode() {
     return ((int) (r + g + b + a) * 255);
   }
@@ -192,6 +192,7 @@ public class Color implements Serializable {
   /**
    * @see java.lang.Object#equals(java.lang.Object)
    */
+  @Override
   public boolean equals(Object other) {
     if (other instanceof Color) {
       Color o = (Color) other;
@@ -204,6 +205,7 @@ public class Color implements Serializable {
   /**
    * @see java.lang.Object#toString()
    */
+  @Override
   public String toString() {
     return "Color (" + r + "," + g + "," + b + "," + a + ")";
   }
@@ -358,6 +360,10 @@ public class Color implements Serializable {
     a *= value;
   }
 
+  public Color withAlpha(float alpha) {
+    return new Color(r, g, b, alpha);
+  }
+  
   /**
    * Add another colour to this one
    * 

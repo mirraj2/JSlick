@@ -384,7 +384,7 @@ public class ParticleSystem {
 	 * Render the particles in the system
 	 * 
 	 * @param x The x coordinate to render the particle system at (in the current coordinate space)
-	 * @param y The y coordinate to render the particle system at (in the current coordiante space)
+	 * @param y The y coordinate to render the particle system at (in the current coordinate space)
 	 */
 	public void render(float x, float y) {
 		if ((sprite == null) && (defaultImageName != null)) {
