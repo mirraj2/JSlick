@@ -48,6 +48,11 @@ public class SGraphics {
     return this;
   }
 
+  public SGraphics draw(Rect r) {
+    g.drawRect(r.x(), r.y(), r.w(), r.h());
+    return this;
+  }
+
   public SGraphics fill(Shape shape) {
     boolean antialias = g.isAntiAlias();
     antialias(false);

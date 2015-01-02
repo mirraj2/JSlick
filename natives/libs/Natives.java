@@ -1,13 +1,11 @@
 package libs;
 
 import jasonlib.IO;
+import jasonlib.Log;
 import jasonlib.OS;
 import java.io.File;
-import org.apache.log4j.Logger;
 
 public class Natives {
-
-  private static final Logger logger = Logger.getLogger(Natives.class);
 
   public static void setupNativeLibs() {
     if (OS.type == OS.OS_Type.WINDOWS) {
@@ -27,7 +25,7 @@ public class Natives {
     for (String n : natives) {
       File target = new File(dir, n);
       if (!target.exists()) {
-        logger.debug("Extracting " + n + " to " + target);
+        Log.debug("Extracting " + n + " to " + target);
         IO.from(Natives.class, n).to(target);
       }
     }
