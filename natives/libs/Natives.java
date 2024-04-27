@@ -1,9 +1,10 @@
 package libs;
 
-import jasonlib.IO;
-import jasonlib.Log;
-import jasonlib.OS;
 import java.io.File;
+
+import ox.IO;
+import ox.Log;
+import ox.OS;
 
 public class Natives {
 

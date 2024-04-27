@@ -1,8 +1,8 @@
 package org.jason;
 
-import jasonlib.Rect;
 import java.awt.Rectangle;
 import java.util.List;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
+
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 
